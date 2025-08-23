@@ -1,11 +1,25 @@
-/*** Workspace Editor Add-on: Placeholder Tools ***/
+/*** Workspace Editor Add-on: Text Styles ***/
 
-// Sidebar card shown when you open the add-on
+
+/**
+ * Homepage entry point for the Docs add-on.
+ * Builds and displays the main style configuration card.
+ * 
+ * @param {Object} e Add-on homepage event object (unused).
+ * @return {CardService.Card} The initial UI card.
+ */
 function onHomepage(e) {
   return buildCard_();
 }
 
 
+/**
+ * Builds the main style selection card, optionally with advanced options.
+ * 
+ * @param {Object} [options] Options for building the card.
+ * @param {boolean|string} [options.showAdvanced] - Whether to show advanced controls (true or '1').
+ * @return {CardService.Card} The constructed card.
+ */
 function buildCard_({ showAdvanced } = {}) {
   var showAdv = showAdvanced === true || showAdvanced === '1';
 
@@ -77,7 +91,13 @@ function buildCard_({ showAdvanced } = {}) {
   return card.build();
 }
 
-/** Action handler toggles the advanced section by updating the current card */
+/**
+ * Action handler for toggling advanced styling options.
+ * Updates the current card to show or hide advanced styling widgets.
+ * 
+ * @param {Object} e The event object containing parameters.
+ * @return {CardService.ActionResponse} Navigation response with updated card.
+ */
 function toggleAdvanced_(e) {
   var show = e && e.parameters && e.parameters.showAdvanced === '1';
   var nav = CardService.newNavigation().updateCard(buildCard_({ showAdvanced: show }));
@@ -86,11 +106,15 @@ function toggleAdvanced_(e) {
   );
 }
 
+/**
+ * Action handler for returning to the main styling page
+ * 
+ * @return {CardService.ActionResponse} Navigation response with updated card.
+ */
 function goBackToMain_() {
   var nav = CardService.newNavigation().updateCard(buildCard_());
   return CardService.newActionResponseBuilder().setNavigation(nav).build();
 }
-
 
 
 
