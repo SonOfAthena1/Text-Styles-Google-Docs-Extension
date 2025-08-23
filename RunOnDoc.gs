@@ -1,4 +1,10 @@
-// Runs when you click Run in the sidebar
+/**
+ * Action handler for "Run" button.
+ * Reads form values, applies styling, and shows result card.
+ * 
+ * @param {Object} e  Event object containing formInputs.
+ * @return {CardService.ActionResponse} Response showing result card.
+ */
 function runOnDoc_(e) {
   var font = 'Consolas';
   var textColor = '#000000';
@@ -65,7 +71,15 @@ function runOnDoc_(e) {
   return createResultCard({title: 'Styled', message: msg});
 }
 
-
+/**
+ * Builds a result card for any event with a title and message.
+ * 
+ * @param {Object} e  Event or plain object containing title and message.
+ * @param {Object} [e.parameters]  Parameters when invoked as Action.
+ * @param {string} [e.title]  Title of the card.
+ * @param {string} [e.message]  Body text of the card.
+ * @return {CardService.ActionResponse} Navigation response with result card.
+ */
 function createResultCard(e) {
   var params = (e && e.parameters) ? e.parameters : (e || {});
 
@@ -91,13 +105,19 @@ function createResultCard(e) {
   );
 }
 
-
+/**
+ * Checks HEX code colors and normalizes them if need be.
+ * If they are too messed up, returns a fallback color.
+ * 
+ * @param {string} val  The input hex color code
+ * @param {string} fallback  The hex color code to fallback on
+ * @return {string} A proper HEX color code
+ */
 function normalizeHexColor(val, fallback) {
   if (!val) return fallback;
   // add leading # if user omitted it, then validate 3/6 hex form
   var withHash = val.startsWith('#') ? val : ('#' + val);
   return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(withHash) ? withHash : fallback;
 }
-
 
 
