@@ -1,0 +1,23 @@
+{
+  "timeZone": "Etc/UTC",
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "addOns": {
+    "common": {
+      "name": "Font Styles",
+      "logoUrl": "https://www.gstatic.com/images/branding/product/1x/docs_2020q4_48dp.png",
+      "useLocaleFromApp": true,
+      "layoutProperties": {
+        "primaryColor": "#1a73e8"
+      }
+    },
+    "docs": {
+      "homepageTrigger": {
+        "runFunction": "onHomepage"
+      }
+    }
+  },
+  "dependencies": {
+    "enabledAdvancedServices": []
+  }
+}
