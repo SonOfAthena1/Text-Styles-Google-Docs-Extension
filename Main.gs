@@ -12,6 +12,7 @@ function onHomepage(e) {
   return buildCard_();
 }
 
+const VERSION = '0.1.1';
 
 /**
  * Builds the main style selection card, optionally with advanced options.
@@ -24,7 +25,7 @@ function buildCard_({ showAdvanced } = {}) {
   var showAdv = showAdvanced === true || showAdvanced === '1';
 
   var card = CardService.newCardBuilder()
-    .setHeader(CardService.newCardHeader().setTitle('Choose Style'));
+    .setHeader(CardService.newCardHeader().setTitle('Choose Style (v' + VERSION + ')'));
 
   var section = CardService.newCardSection()
     .addWidget(
