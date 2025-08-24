@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
+## [0.1.2] - 2025-08-24
+### Changed
+- Updated `appsscript.json` to include explicit OAuth scopes required for Workspace Add-ons.
+- Changed `logoUrl` in `appsscript.json` to use the project’s custom logo.
+
 ## [0.1.1] - 2025-08-23
 ### Added
 - `goBackToMain_()` action handler that returns a proper `ActionResponse`.
