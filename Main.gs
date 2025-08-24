@@ -12,7 +12,7 @@ function onHomepage(e) {
   return buildCard_();
 }
 
-const VERSION = '0.1.1';
+const VERSION = '0.1.2';
 
 /**
  * Builds the main style selection card, optionally with advanced options.
