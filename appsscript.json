@@ -10,13 +10,19 @@
   "addOns": {
     "common": {
       "name": "Font Styles",
-      "logoUrl": "https://www.gstatic.com/images/branding/product/1x/docs_2020q4_48dp.png",
+      "logoUrl": "https://drive.google.com/uc?export=view&id=11eQ4xtiE7kKT-CwC7KiLBOFpJTdmCEpP",
       "useLocaleFromApp": true,
-      "layoutProperties": { "primaryColor": "#1a73e8" }
+      "layoutProperties": {
+        "primaryColor": "#1a73e8"
+      }
     },
     "docs": {
-      "homepageTrigger": { "runFunction": "onHomepage" }
+      "homepageTrigger": {
+        "runFunction": "onHomepage"
+      }
     }
   },
-  "dependencies": { "enabledAdvancedServices": [] }
+  "dependencies": {
+    "enabledAdvancedServices": []
+  }
 }
