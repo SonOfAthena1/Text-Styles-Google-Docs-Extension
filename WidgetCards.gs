@@ -12,7 +12,7 @@ function descriptionCard() {
 }
 
 /**
- * Builds a "Tips" button that takes the user to a new card with a tip about usage.
+ * Builds a "Tips" button that provides a pop-up notification with a tip about usage.
  * 
  * @return {CardService.TextButton} A button widget.
  */
@@ -25,8 +25,8 @@ function tipsButtonCard() {
       .setText(thisTitle)
       .setOnClickAction(
         CardService.newAction()
-          .setFunctionName('createResultCard')
-          .setParameters({title: thisTitle, message: msg})
+          .setFunctionName('createResultNotification')
+          .setParameters({message: msg})
       )
       // .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
   );
@@ -240,25 +240,6 @@ function runButtonCard() {
       .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
   );
 }
-
-/**
- * Builds a "Continue Styling" button that returns the user to the main card.
- * 
- * @return {CardService.TextButton} Continue button widget.
- */
-function continueStylingButtonCard() {
-  return (
-    CardService.newTextButton()
-      .setText('Continue Styling')
-      .setOnClickAction(CardService.newAction().setFunctionName('goBackToMain_'))
-      .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
-  );
-}
-
-
-
-
-
 
 
 
