@@ -9,6 +9,20 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
+## [0.2.2] - 2025-08-30
+### Added
+- Added little font size guard to make sure font size stays within range 2-200
+
+### Changed
+- Adjusted `createResultCard()` to display a notification with a message instead of create a new card where a button was needed to return the user to the home menu.
+- Renamed `createResultCard()` to be `createResultNotification()`
+- Updated `tipsButtonCard()` and `runOnDoc_()` to use updated function `createResultNotification()`
+- Updated version constant
+
+### Removed
+- Deleted `continueStylingButtonCard()`
+- Deleted `goBackToMain_()`
+
 ## [0.1.2] - 2025-08-24
 ### Changed
 - Updated `appsscript.json` to include explicit OAuth scopes required for Workspace Add-ons.
