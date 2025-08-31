@@ -34,8 +34,9 @@ function runOnDoc_(e) {
       fontSize = Number(String(form.font_size?.stringInputs.value[0] || fontSize).trim());
       if (!Number.isFinite(fontSize) || fontSize <= 0) {
         fontSize = 11; // fallback
+      } else {
+        fontSize = Math.min(Math.max(fontSize, 2), 200);
       }
-
       if (form.bold_switch) bold = true;
       if (form.italic_switch) italic = true;
       if (form.underline_switch) underline = true;
@@ -58,8 +59,7 @@ function runOnDoc_(e) {
   );
 
   if (count === 0) {
-    return createResultCard({
-      title: 'No matches',
+    return createResultNotification({
       message: 'No text found between your delimiters in the current selection/document.'
     });
   }
@@ -68,41 +68,26 @@ function runOnDoc_(e) {
   var msg = 'Updated ' + count + ' occurrence' + (count === 1 ? '' : 's') +
             ' with font "' + font + '" and highlight ' + highlightColor + '.';
 
-  return createResultCard({title: 'Styled', message: msg});
+  return createResultNotification({message: msg});
 }
 
 /**
- * Builds a result card for any event with a title and message.
+ * Builds a result notification for an event with an input message.
  * 
  * @param {Object} e  Event or plain object containing title and message.
  * @param {Object} [e.parameters]  Parameters when invoked as Action.
- * @param {string} [e.title]  Title of the card.
  * @param {string} [e.message]  Body text of the card.
  * @return {CardService.ActionResponse} Navigation response with result card.
  */
-function createResultCard(e) {
+function createResultNotification(e) {
   var params = (e && e.parameters) ? e.parameters : (e || {});
 
   // Safely read values with fallbacks
-  var thisTitle = params.title ?? 'Error';
   var msg = params.message ?? 'Sorry an error occured. Please refresh and try again';
 
-  var resultCard = CardService.newCardBuilder()
-    .setHeader(CardService.newCardHeader().setTitle(thisTitle))
-    .addSection(
-      CardService.newCardSection()
-        .addWidget(CardService.newTextParagraph().setText(msg))
-        .addWidget(
-          continueStylingButtonCard()
-        )
-    )
-  .build();
-  
-  return(
-    CardService.newActionResponseBuilder()
-      .setNavigation(CardService.newNavigation().updateCard(resultCard))
-      .build()
-  );
+  return CardService.newActionResponseBuilder()
+    .setNotification(CardService.newNotification().setText(msg))
+    .build();
 }
 
 /**
@@ -119,5 +104,3 @@ function normalizeHexColor(val, fallback) {
   var withHash = val.startsWith('#') ? val : ('#' + val);
   return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(withHash) ? withHash : fallback;
 }
-
-
