@@ -12,7 +12,7 @@ function onHomepage(e) {
   return buildCard_();
 }
 
-const VERSION = '0.1.2';
+const VERSION = '0.2.2';
 
 /**
  * Builds the main style selection card, optionally with advanced options.
@@ -106,16 +106,3 @@ function toggleAdvanced_(e) {
     CardService.newActionResponseBuilder().setNavigation(nav).build()
   );
 }
-
-/**
- * Action handler for returning to the main styling page
- * 
- * @return {CardService.ActionResponse} Navigation response with updated card.
- */
-function goBackToMain_() {
-  var nav = CardService.newNavigation().updateCard(buildCard_());
-  return CardService.newActionResponseBuilder().setNavigation(nav).build();
-}
-
-
-
