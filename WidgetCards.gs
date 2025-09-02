@@ -40,9 +40,9 @@ function tipsButtonCard() {
 function fontInputCard() {
   return (
     CardService.newTextInput()
-    .setTitle('Font family')
-    .setFieldName('font')
-    .setValue('Consolas')
+      .setTitle('Font family')
+      .setFieldName('font')
+      .setValue('Consolas')
   );
 }
 
