@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
-## [0.2.2] - 2025-08-30
+## [0.2.0] - 2025-08-30
 ### Added
 - Added little font size guard to make sure font size stays within range 2-200
 
