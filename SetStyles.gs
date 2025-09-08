@@ -14,7 +14,7 @@
  * @param {boolean} deleteDelims  Whether to delete delimiters after styling.
  * @return {number} Number of matches updated.
  */
-function setFontAndHighlightForAnglePlaceholders(
+function applyStyleToDoc(
   fontFamily, textColor, highlightColor, fontSize, bold, italic, underline,
   startChar, endChar, includeDelims, deleteDelims
 ) {

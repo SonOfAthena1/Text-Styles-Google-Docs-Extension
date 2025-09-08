@@ -21,7 +21,7 @@ function saveStyle_(e) {
   if (!name) return createResultNotification({ message: 'Please enter a style name.' });
   if(getStyle(name)) return createResultNotification({ message: 'That style name already exists, please try something else.'})
 
-  const cfg = collectConfigFromForm_(form);
+  const cfg = collectConfigFromForm(form);
   try {
     addStyleAndSave(name, cfg);
     return createResultNotification({ message: `Saved style "${name}".` });
@@ -68,6 +68,36 @@ function onEditStyle_(e) {
   return (
     CardService.newActionResponseBuilder().setNavigation(nav).build()
   );
+}
+
+/**
+ * Applies current style options to document.
+ * 
+ * - Reads style options from current form
+ * - Uses applyStyleToDoc method, which returns a count of times style was applied
+ * - Creates notification if there is no current text with the given delimeters
+ * - Creates notification for the number of times the given style was applied on the doc
+ * 
+ * @param {GoogleAppsScript.Events.EventObject} e  The event object containing form inputs.
+ * @returns {GoogleAppsScript.Card_Service.ActionResponse} An action response with a notification result.
+ */
+function applyStyle_(e) {
+  const form = e?.commonEventObject?.formInputs;
+  const cfg = collectConfigFromForm(form);
+
+  let count = applyStyleToDoc(cfg);
+
+  if (count === 0) {
+    return createResultNotification({
+      message: 'No text found between your delimiters in the current selection/document.'
+    });
+  }
+
+  // Show result message
+  let msg = 'Updated ' + count + ' occurrence' + (count === 1 ? '' : 's') +
+            ' with font "' + font + '" and highlight ' + highlightColor + '.';
+
+  return createResultNotification({message: msg});
 }
 
 /**
