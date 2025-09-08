@@ -124,4 +124,13 @@ function createResultNotification(e) {
     .build();
 }
 
+/**
+ * Event handler for returning to the home page
+ * 
+ * @return {CardService.ActionResponse} Navigation response with updated card.
+ */
+function goBackToHome_() {
+  var nav = CardService.newNavigation().updateCard(buildCard_());
+  return CardService.newActionResponseBuilder().setNavigation(nav).build();
+}
 

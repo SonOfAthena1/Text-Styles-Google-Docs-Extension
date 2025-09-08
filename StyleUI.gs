@@ -82,6 +82,9 @@ function styleCard(styleName, styleData, showAdv) {
     )
     .addWidget(
       deleteStyleButton()
+    )
+    .addWidget(
+      goBackToHomeButton()
     );
 
   card.addSection(section);

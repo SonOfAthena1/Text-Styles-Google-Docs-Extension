@@ -355,7 +355,21 @@ function deleteStyleButton() {
     CardService.newTextButton()
       .setText('Delete Style')
       .setOnClickAction(CardService.newAction().setFunctionName('deleteSavedStyle_'))
-      .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
+      .setTextButtonStyle(CardService.TextButtonStyle.FILLED_TONAL)
+  );
+}
+
+/**
+ * Builds a "Back to Home" button.
+ *
+ * @return {CardService.TextButton} Back to Home button widget.
+ */
+function goBackToHomeButton() {
+  return (
+    CardService.newTextButton()
+      .setText('Back to Home')
+      .setOnClickAction(CardService.newAction().setFunctionName('goBackToHome_'))
+      .setTextButtonStyle(CardService.TextButtonStyle.FILLED_TONAL)
   );
 }
 
