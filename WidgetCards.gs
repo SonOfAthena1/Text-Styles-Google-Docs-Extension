@@ -324,7 +324,7 @@ function runButtonCard() {
   return (
     CardService.newTextButton()
       .setText('Apply Style')
-      .setOnClickAction(CardService.newAction().setFunctionName('runOnDoc_'))
+      .setOnClickAction(CardService.newAction().setFunctionName('applyStyle_'))
       .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
   );
 }

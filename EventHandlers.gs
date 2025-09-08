@@ -83,6 +83,7 @@ function onEditStyle_(e) {
  */
 function applyStyle_(e) {
   const form = e?.commonEventObject?.formInputs;
+  const name = String(form?.style_name?.stringInputs?.value?.[0] || 'Untitled').trim();
   const cfg = collectConfigFromForm(form);
 
   let count = applyStyleToDoc(cfg);
@@ -95,7 +96,7 @@ function applyStyle_(e) {
 
   // Show result message
   let msg = 'Updated ' + count + ' occurrence' + (count === 1 ? '' : 's') +
-            ' with font "' + font + '" and highlight ' + highlightColor + '.';
+            ' with the styling options set for ' + name + '.';
 
   return createResultNotification({message: msg});
 }
