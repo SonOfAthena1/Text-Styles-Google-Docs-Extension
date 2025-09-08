@@ -48,6 +48,13 @@ function collectConfigFromForm(form) {
     startChar = String(form.character1?.stringInputs.value[0] || defaults.startChar).trim();
     endChar = String(form.character2?.stringInputs.value[0] || defaults.endChar).trim();
     fontSize = Number(String(form.font_size?.stringInputs.value[0] || defaults.fontSize).trim()) || 11;
+
+    if (!Number.isFinite(fontSize) || fontSize <= 0) {
+      fontSize = 11; // fallback
+    } else {
+      fontSize = Math.min(Math.max(fontSize, 2), 200);
+    }
+
     bold = !!form.bold_switch;
     italic = !!form.italic_switch;
     underline = !!form.underline_switch;
