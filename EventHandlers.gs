@@ -61,7 +61,13 @@ function deleteSavedStyle_(e) {
  */
 function onEditStyle_(e) {
   let styleName = e?.parameters?.name || "";
-  let styleData = e?.parameters?.data ? JSON.parse(e.parameters.data) : {};
+  let styleData;
+  try {
+    styleData = e?.parameters?.data ? JSON.parse(e.parameters.data) : {};
+  } catch(er) {
+    console.error(er);
+    styleData = {};
+  }
   let showAdv = e?.parameters?.showAdvanced === '1';
 
   let nav = CardService.newNavigation().updateCard(styleCard(styleName, styleData, showAdv));
