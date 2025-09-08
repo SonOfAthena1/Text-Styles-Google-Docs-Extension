@@ -64,12 +64,3 @@ function setFontAndHighlightForAnglePlaceholders(
   return updated;
 }
 
-/**
- * Escapes regex metacharacters in a string (by adding '\') so it can be used literally.
- * 
- * @param {string} str  String to escape.
- * @return {string} Escaped string for safe regex use.
- */
-function escapeRegex(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
