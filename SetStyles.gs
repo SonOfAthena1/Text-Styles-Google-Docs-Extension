@@ -1,58 +1,61 @@
 /**
  * Core logic: finds text between delimiters and applies style settings.
+ *
+ * - Uses regex to find all text enclosed between the given delimiters.
+ * - Applies font, size, color, and formatting options to each match.
+ * - Optionally includes or deletes delimiters after applying styles.
+ *
+ * @param {Object} styleConfig  The style configuration object.
+ * @param {string} styleConfig.font - Font family to apply.
+ * @param {string} styleConfig.textColor - Foreground (text) color in HEX (e.g. "#000000").
+ * @param {string} styleConfig.highlightColor - Background (highlight) color in HEX (e.g. "#efefef").
+ * @param {number} styleConfig.fontSize - Font size in points.
+ * @param {boolean} styleConfig.bold - Whether to apply bold formatting.
+ * @param {boolean} styleConfig.italic - Whether to apply italic formatting.
+ * @param {boolean} styleConfig.underline - Whether to apply underline formatting.
+ * @param {string} styleConfig.startChar - Starting delimiter string.
+ * @param {string} styleConfig.endChar - Ending delimiter string.
+ * @param {boolean} styleConfig.includeDelims - Whether to include delimiters in the styled range.
+ * @param {boolean} styleConfig.deleteDelims - Whether to delete delimiters after styling.
  * 
- * @param {string} fontFamily  Font family to apply.
- * @param {string} textColor  Foreground color in HEX.
- * @param {string} highlightColor  Background color in HEX.
- * @param {number} fontSize  Font size in points.
- * @param {boolean} bold  Whether to apply bold.
- * @param {boolean} italic  Whether to apply italic.
- * @param {boolean} underline  Whether to apply underline.
- * @param {string} startChar  Start delimiter string.
- * @param {string} endChar  End delimiter string.
- * @param {boolean} includeDelims  Whether to include delimiters in styled range.
- * @param {boolean} deleteDelims  Whether to delete delimiters after styling.
- * @return {number} Number of matches updated.
+ * @return {number} The number of text matches updated in the document.
  */
-function applyStyleToDoc(
-  fontFamily, textColor, highlightColor, fontSize, bold, italic, underline,
-  startChar, endChar, includeDelims, deleteDelims
-) {
-  var body = DocumentApp.getActiveDocument().getBody();
-  var safeStart = escapeRegex(startChar);
-  var safeEnd = escapeRegex(endChar);
+function applyStyleToDoc(styleConfig) {
+  let body = DocumentApp.getActiveDocument().getBody();
+  let safeStart = escapeRegex(styleConfig.startChar);
+  let safeEnd = escapeRegex(styleConfig.endChar);
 
-  var pattern = safeStart + "[\\s\\S]*?" + safeEnd;
+  let pattern = safeStart + "[\\s\\S]*?" + safeEnd;
 
-  var updated = 0;
-  var match = body.findText(pattern);
+  let updated = 0;
+  let match = body.findText(pattern);
 
   while (match) {
-    var el = match.getElement();
+    let el = match.getElement();
     if (el.editAsText) {
-      var t = el.asText();
-      var start = match.getStartOffset();
-      var end = match.getEndOffsetInclusive();
+      let t = el.asText();
+      let start = match.getStartOffset();
+      let end = match.getEndOffsetInclusive();
 
-      var styleStart = includeDelims ? start : start + startChar.length;
-      var styleEnd   = includeDelims ? end   : end - endChar.length;
+      let styleStart = styleConfig.includeDelims ? start : start + styleConfig.startChar.length;
+      let styleEnd   = styleConfig.includeDelims ? end   : end - styleConfig.endChar.length;
 
       if (styleStart <= styleEnd) {
-        t.setFontFamily(styleStart, styleEnd, fontFamily);
-        t.setFontSize(styleStart, styleEnd, fontSize);
-        t.setForegroundColor(styleStart, styleEnd, textColor);
-        t.setBackgroundColor(styleStart, styleEnd, highlightColor);
-        t.setBold(styleStart, styleEnd, bold);
-        t.setItalic(styleStart, styleEnd, italic);
-        t.setUnderline(styleStart, styleEnd, underline);
+        t.setFontFamily(styleStart, styleEnd, styleConfig.font);
+        t.setFontSize(styleStart, styleEnd, styleConfig.fontSize);
+        t.setForegroundColor(styleStart, styleEnd, styleConfig.textColor);
+        t.setBackgroundColor(styleStart, styleEnd, styleConfig.highlightColor);
+        t.setBold(styleStart, styleEnd, styleConfig.bold);
+        t.setItalic(styleStart, styleEnd, styleConfig.italic);
+        t.setUnderline(styleStart, styleEnd, styleConfig.underline);
       }
 
-      if (deleteDelims) {
+      if (styleConfig.deleteDelims) {
         // delete right first, then left; refresh after each mutation
-        t.deleteText(end - endChar.length + 1, end);
+        t.deleteText(end - styleConfig.endChar.length + 1, end);
         t = match.getElement().asText();
 
-        t.deleteText(start, start + startChar.length - 1);
+        t.deleteText(start, start + styleConfig.startChar.length - 1);
         t = match.getElement().asText();
       }
 
@@ -63,4 +66,5 @@ function applyStyleToDoc(
   }
   return updated;
 }
+
 
