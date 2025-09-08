@@ -17,8 +17,8 @@ function descriptionCard() {
  * @return {CardService.TextButton} A button widget.
  */
 function tipsButtonCard() {
-  var thisTitle = 'Tips';
-  var msg = 'If you want the markers to work across new lines (enters), press shift enter when entering, otherwise an end marker is needed for the end of every paragraph.';
+  let thisTitle = 'Tips';
+  let msg = 'If you want the markers to work across new lines (enters), press shift enter when entering, otherwise an end marker is needed for the end of every paragraph.';
 
   return (
     CardService.newTextButton()
