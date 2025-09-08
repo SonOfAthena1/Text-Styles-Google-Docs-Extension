@@ -14,7 +14,6 @@
  */
 function styleCard(styleName, styleData, showAdv) {
   let card = CardService.newCardBuilder()
-    .setHeader(CardService.newCardHeader().setTitle('Choose Styling (v' + VERSION + ')'));
 
   let section = CardService.newCardSection()
     .addWidget(
