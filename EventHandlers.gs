@@ -19,7 +19,6 @@ function saveStyle_(e) {
   const form = e?.commonEventObject?.formInputs;
   const name = String(form?.style_name?.stringInputs?.value?.[0] || '').trim();
   if (!name) return createResultNotification({ message: 'Please enter a style name.' });
-  if(getStyle(name)) return createResultNotification({ message: 'That style name already exists, please try something else.'})
 
   const cfg = collectConfigFromForm(form);
   try {
