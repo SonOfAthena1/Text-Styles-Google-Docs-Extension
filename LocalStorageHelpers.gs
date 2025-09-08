@@ -85,7 +85,7 @@ function deleteStyle(name) {
     saveStylesObjToLocal(styles);
   }
 }
-ge
+
 /**
  * Retrieves a style configuration by name.
  *

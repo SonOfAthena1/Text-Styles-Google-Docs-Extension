@@ -71,24 +71,7 @@ function runOnDoc_(e) {
   return createResultNotification({message: msg});
 }
 
-/**
- * Builds a result notification for an event with an input message.
- * 
- * @param {Object} e  Event or plain object containing title and message.
- * @param {Object} [e.parameters]  Parameters when invoked as Action.
- * @param {string} [e.message]  Body text of the card.
- * @return {CardService.ActionResponse} Navigation response with result card.
- */
-function createResultNotification(e) {
-  var params = (e && e.parameters) ? e.parameters : (e || {});
 
-  // Safely read values with fallbacks
-  var msg = params.message ?? 'Sorry an error occured. Please refresh and try again';
-
-  return CardService.newActionResponseBuilder()
-    .setNotification(CardService.newNotification().setText(msg))
-    .build();
-}
 
 /**
  * Checks HEX code colors and normalizes them if need be.

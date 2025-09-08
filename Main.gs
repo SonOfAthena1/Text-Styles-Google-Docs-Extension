@@ -92,17 +92,4 @@ function buildCard_({ showAdvanced } = {}) {
   return card.build();
 }
 
-/**
- * Action handler for toggling advanced styling options.
- * Updates the current card to show or hide advanced styling widgets.
- * 
- * @param {Object} e The event object containing parameters.
- * @return {CardService.ActionResponse} Navigation response with updated card.
- */
-function toggleAdvanced_(e) {
-  var show = e && e.parameters && e.parameters.showAdvanced === '1';
-  var nav = CardService.newNavigation().updateCard(buildCard_({ showAdvanced: show }));
-  return (
-    CardService.newActionResponseBuilder().setNavigation(nav).build()
-  );
-}
+
