@@ -9,7 +9,7 @@
   ],
   "addOns": {
     "common": {
-      "name": "Font Styles",
+      "name": "Text Styles",
       "logoUrl": "https://drive.google.com/uc?export=view&id=11eQ4xtiE7kKT-CwC7KiLBOFpJTdmCEpP",
       "useLocaleFromApp": true,
       "layoutProperties": {
