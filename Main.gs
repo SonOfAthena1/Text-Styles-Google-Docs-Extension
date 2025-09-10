@@ -25,9 +25,6 @@ const VERSION = '1.0.0';
 function buildCard_() {
   const jsonObject = loadStylesData();
 
-  let card = CardService.newCardBuilder()
-    .setHeader(CardService.newCardHeader().setTitle('Text Styles (v' + VERSION + ')'));
-
   let section = CardService.newCardSection();
 
   Object.entries(jsonObject).forEach(([styleName, styleData]) => {
@@ -39,9 +36,8 @@ function buildCard_() {
   section.addWidget(
     createNewStyleButton()
   );
-    
-  card.addSection(section);
-  return card.build();
+
+  return cardPage(`Version ${VERSION}`, section);
 }
 
 
