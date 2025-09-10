@@ -14,7 +14,6 @@
  * @return {CardService.DecoratedText} Decorated text widget with edit button.
  */
 function styleNameAndEditCard(styleName, styleData) {
-  console.log(typeof styleData);
   console.log(JSON.stringify(styleData));
   return (
     CardService.newDecoratedText()
@@ -354,7 +353,7 @@ function deleteStyleButton() {
   return (
     CardService.newTextButton()
       .setText('Delete Style')
-      .setOnClickAction(CardService.newAction().setFunctionName('deleteSavedStyle_'))
+      .setOnClickAction(CardService.newAction().setFunctionName('showConfirmCard_'))
       .setTextButtonStyle(CardService.TextButtonStyle.FILLED_TONAL)
   );
 }
@@ -372,6 +371,73 @@ function goBackToHomeButton() {
       .setTextButtonStyle(CardService.TextButtonStyle.FILLED_TONAL)
   );
 }
+
+/**
+ * Builds a confirmation message paragraph for deleting a saved style.
+ *
+ * @param {string} name  The style name to display in the confirmation prompt.
+ * @return {CardService.TextParagraph} Confirmation message widget.
+ */
+function confirmDeleteMessageCard(name) {
+  return(
+    CardService.newTextParagraph()
+      .setText(`Are you sure you want to delete ${name}?`)
+  )
+}
+
+/**
+ * Builds a ButtonSet with "No" and "Yes" actions for delete confirmation.
+ * "No" reopens the edit view; "Yes" deletes the saved style.
+ *
+ * @param {string} name  The style name of the style to be deleted.
+ * @return {CardService.ButtonSet} Button set widget.
+ */
+function yesAndNoConfirmDeleteButtons(name) {
+  return(
+    CardService.newButtonSet()
+      .addButton(
+        CardService.newTextButton()
+          .setText('No')
+          .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
+          .setOnClickAction(
+            CardService.newAction()
+              .setFunctionName('onEditStyle_')
+              .setParameters({
+                name: String(name),
+                data: JSON.stringify(getStyle(name)),
+                showAdvanced: '0'
+              })
+          )
+      )
+      .addButton(
+        CardService.newTextButton()
+          .setText('Yes')
+          .setTextButtonStyle(CardService.TextButtonStyle.FILLED_TONAL)
+          .setOnClickAction(
+            CardService.newAction()
+              .setFunctionName('deleteSavedStyle_')
+              .setParameters({styleName: name})
+          )
+      )
+  )
+}
+
+/**
+ * Utility to build a single-section Card with a header title.
+ *
+ * @param {string} title  Card header title.
+ * @param {CardService.CardSection} section  Section to add to the card.
+ * @return {CardService.Card} Built card.
+ */
+function cardPage(title, section) {
+  return (
+    CardService.newCardBuilder()
+      .setHeader(CardService.newCardHeader().setTitle(title))
+      .addSection(section)
+      .build()
+    );
+}
+
 
 
 
