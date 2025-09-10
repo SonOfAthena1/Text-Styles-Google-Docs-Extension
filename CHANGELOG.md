@@ -9,6 +9,20 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
+## [1.1.0] - 2025-09-09
+### Added
+- `showConfirmCard_()` method with documentation comments.
+- `confirmDeleteMessageCard()`, `yesAndNoConfirmDeleteButtons()`, and `cardPage()` UI helper methods in `Widgets.gs`.
+
+### Changed
+- `deleteSavedStyle_()` now redirects the user to a page letting them know the style has been deleted and giving them an option to return to the home page instead of returning a notification.
+- `deleteStyleButton()` updated to call the new event handler `showConfirmCard_()`.
+- `buildCard_()` cleaned up and now uses the new `cardPage()` UI method.
+
+### Fixed
+- Improved clarity and consistency in UI flow for deleting styles.
+
+
 ## [1.0.0] – 2025-09-07
 ### Added
 - **Saved Styles**: Create, name, and persist multiple style presets (stored under keys like `"default"`, `"style1"`, etc.) using `UserProperties`.
