@@ -32,20 +32,26 @@ function saveStyle_(e) {
 /**
  * Deletes a previously saved style by its name.
  *
- * - Extracts the style name from the form input.
+ * - Extracts the style name from the action parameters.
  * - Validates that a name was provided.
  * - Removes the style from storage.
- * - Returns a notification with the deletion result.
+ * - Returns a card page confirming deletion and offering navigation back home.
  *
- * @param {GoogleAppsScript.Events.EventObject} e  The event object containing form inputs.
- * @returns {GoogleAppsScript.Card_Service.ActionResponse} An action response with a notification result.
+ * @param {GoogleAppsScript.Events.EventObject} e  The event object containing action parameters.
+ * @returns {GoogleAppsScript.Card_Service.ActionResponse} An action response updating the card.
  */
 function deleteSavedStyle_(e) {
-  const form = e?.commonEventObject?.formInputs;
-  const name = String(form?.style_name?.stringInputs?.value?.[0] || '').trim();
+  const name = String(e?.parameters.styleName || '').trim();
   if (!name) return createResultNotification({ message: 'Select a saved style first.' });
+
   deleteStyle(name);
-  return createResultNotification({ message: `Deleted style "${name}".` });
+  return cardPage(
+    `${name} has been deleted`,
+    CardService.newCardSection()
+      .addWidget(
+        goBackToHomeButton()
+      )    
+  );
 }
 
 /**
@@ -138,4 +144,34 @@ function goBackToHome_() {
   var nav = CardService.newNavigation().updateCard(buildCard_());
   return CardService.newActionResponseBuilder().setNavigation(nav).build();
 }
+
+/**
+ * Shows a confirmation card (e.g., before deleting a style).
+ *
+ * - Retrieves the style name from the form inputs to display in the confirmation message.
+ * - Renders the confirmation message and Yes/No buttons.
+ *
+ * @param {GoogleAppsScript.Events.EventObject} e  The event object containing form inputs.
+ * @returns {GoogleAppsScript.Card_Service.ActionResponse} An action response with the confirmation card.
+ */
+function showConfirmCard_(e) {
+  const form = e?.commonEventObject?.formInputs;
+  const name = String(form?.style_name?.stringInputs?.value?.[0] || 'Untitled').trim();
+
+  return (
+    cardPage(
+      'Confirm Action',
+      CardService.newCardSection()
+        .addWidget(
+          confirmDeleteMessageCard(name)
+        )
+        .addWidget(
+          yesAndNoConfirmDeleteButtons(name)
+        )
+    )
+  )
+}
+
+
+
 
