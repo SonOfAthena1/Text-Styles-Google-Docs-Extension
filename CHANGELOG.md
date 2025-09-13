@@ -9,6 +9,17 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
+## [1.1.2] - 2025-09-13
+### Changed
+- Switched the order of buttons so that 'Save Style' button comes before the 'Apply Style' button. This should improve the UX because users should always try to save styles before using them.
+- Updated the instructions paragraph in `descriptionCard()` to be much more detailed and up-to-date.
+- Adjusted `collectConfigFromForm()` so that the method knows if it's being used during an apply style or save style. If its being used during an apply style, it will check to see if the extra styling options exist, and if not, look for their values in a saved version of the style (if exists).
+- Adjusted the use of `collectConfigFromForm()` in EventHandlers.gs to refelct its new functionality.
+
+## Fixed
+- Fixed the bug that would happen when users wouldn't have 'View more styling options' clicked and therefore clicking 'Apply Styles' would result in none of the extra styling options being applied, like Bolded or Underlined, even if the style was saved with some of the extra styling options being enabled. 
+
+
 ## [1.1.1] - 2025-09-13
 ### Added
 - Introduced `@typedef {Object} StyleData` to document the structure of style configuration objects.
@@ -89,6 +100,7 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 [Keep a Changelog]: https://keepachangelog.com/en/1.1.0/
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
 [Unreleased]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.1...HEAD
+[1.1.2]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v0.2.0...v1.0.0
