@@ -7,6 +7,7 @@
  * - Falls back to default style values if a field is missing.
  * - Converts and trims values to the proper types (string, number, boolean).
  * - Normalizes color strings to valid hex codes.
+ * - If method is being used to apply a style, it will check whether bold_switch, italic_switch, and underline_switch exist. If not (likely because \'View more styling options\' isn't clicked), will use their saved values if the style has been saved previously.
  *
  * @param {Object} form  The form input object from the event (`e.commonEventObject.formInputs`).
  * @param {Object} form.font - Font name input.
@@ -20,6 +21,7 @@
  * @param {Object} form.underline_switch - Switch control for underline styling.
  * @param {Object} form.include_switch - Switch control for including delimiters.
  * @param {Object} form.delete_switch - Switch control for deleting delimiters.
+ * @param {boolean} applyingStyle  Whether or not this method is being called to apply a style or save one.
  *
  * @returns {Object} A style configuration object with the following properties:
  * @returns {string} return.font - Selected font name.
@@ -35,13 +37,15 @@
  * @returns {boolean} return.deleteDelims - Whether to delete delimiters after applying.
  *
  */
-function collectConfigFromForm(form) {
+function collectConfigFromForm(form, applyingStyle) {
   let defaults = DEFAULT_STYLE_JSON_OBJ["default"];
 
-  let font, textColor, highlightColor, fontSize, bold, italic, underline,
+  let styleName, font, textColor, highlightColor, fontSize, bold, italic, underline,
       startChar, endChar, includeDelims, deleteDelims;
+  let styleData;
 
   if (form) {
+    styleName = String(form.style_name?.stringInputs.value[0] || "default").trim();
     font = String(form.font?.stringInputs.value[0] || defaults.font).trim();
     textColor = String(form.text_color?.stringInputs.value[0] || defaults.textColor).trim();
     highlightColor = String(form.color?.stringInputs.value[0] || defaults.highlightColor).trim();
@@ -55,9 +59,17 @@ function collectConfigFromForm(form) {
       fontSize = Math.min(Math.max(fontSize, 2), 200);
     }
 
-    bold = !!form.bold_switch;
-    italic = !!form.italic_switch;
-    underline = !!form.underline_switch;
+    if(applyingStyle && !form.bold_switch && !form.italic_switch && !form.underline_switch) {
+      styleData = getStyle(styleName) ?? defaults;
+      bold = styleData.bold;
+      italic = styleData.italic;
+      underline = styleData.underline;
+    } 
+    else {
+      bold = !!form.bold_switch;
+      italic = !!form.italic_switch;
+      underline = !!form.underline_switch;
+    }
     includeDelims = !!form.include_switch;
     deleteDelims = !!form.delete_switch;
   }
@@ -70,5 +82,3 @@ function collectConfigFromForm(form) {
   return { font, textColor, highlightColor, fontSize, bold, italic, underline,
            startChar, endChar, includeDelims, deleteDelims };
 }
-
-

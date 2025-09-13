@@ -94,7 +94,7 @@ function styleNameInputCard(styleName) {
 function descriptionCard() {
   return (
     CardService.newTextParagraph().setText(
-      'Enter a font family, text color, highlight color (hex, e.g., #d9d9d9), and start/end characters to mark what should be styled then click Run.'
+      'Enter styling options like: font, text color, highlight color (hex, e.g., #d9d9d9), and start/end characters which mark what text should be styled. For example < this text will be styled >. Save your style, then click \'Apply Style\' to use it.'
     )
   );
 }

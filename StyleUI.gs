@@ -75,10 +75,10 @@ function styleCard(styleName, styleData, showAdv) {
       includeSwitchCard(styleData)
     )
     .addWidget(
-      runButtonCard()
+      saveStyleButton()
     )
     .addWidget(
-      saveStyleButton()
+      runButtonCard()
     )
     .addWidget(
       deleteStyleButton()

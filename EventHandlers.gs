@@ -20,7 +20,7 @@ function saveStyle_(e) {
   const name = String(form?.style_name?.stringInputs?.value?.[0] || '').trim();
   if (!name) return createResultNotification({ message: 'Please enter a style name.' });
 
-  const cfg = collectConfigFromForm(form);
+  const cfg = collectConfigFromForm(form, false);
   try {
     addStyleAndSave(name, cfg);
     return createResultNotification({ message: `Saved style "${name}".` });
@@ -95,7 +95,7 @@ function onEditStyle_(e) {
 function applyStyle_(e) {
   const form = e?.commonEventObject?.formInputs;
   const name = String(form?.style_name?.stringInputs?.value?.[0] || 'Untitled').trim();
-  const cfg = collectConfigFromForm(form);
+  const cfg = collectConfigFromForm(form, true);
 
   let count = applyStyleToDoc(cfg);
 
