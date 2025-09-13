@@ -11,7 +11,7 @@ function onHomepage(e) {
   return buildCard_();
 }
 
-const VERSION = '1.1.0';
+const VERSION = '1.1.1';
 
 /**
  * Builds the main style selection card with all saved styles.
