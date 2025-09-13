@@ -9,6 +9,14 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
+## [1.1.1] - 2025-09-13
+### Added
+- Introduced `@typedef {Object} StyleData` to document the structure of style configuration objects.
+
+### Changed
+- Updated all JSDoc comments to use `{StyleData}` instead of `{Object}`.
+
+
 ## [1.1.0] - 2025-09-09
 ### Added
 - `showConfirmCard_()` method with documentation comments.
@@ -23,7 +31,7 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 - Improved clarity and consistency in UI flow for deleting styles.
 
 
-## [1.0.0] – 2025-09-07
+## [1.0.0] - 2025-09-07
 ### Added
 - **Saved Styles**: Create, name, and persist multiple style presets (stored under keys like `"default"`, `"style1"`, etc.) using `UserProperties`.
 - **Edit & Manage UI**: Cards for listing styles with an **Edit** button; “+” button to create a new style.
@@ -80,3 +88,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.1.0/
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
+[Unreleased]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v0.2.0...v1.0.0
+[0.2.0]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v0.1.2...v0.2.0
+[0.1.2]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/releases/tag/v0.1.1
