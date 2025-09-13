@@ -4,13 +4,28 @@
  * for the Google Docs add-on interface.
  */
 
+/**
+ * Style data used to build form widgets and actions.
+ * @typedef {Object} StyleData
+ * @property {string} [font]
+ * @property {string} [textColor]          // HEX like "#000000"
+ * @property {string} [highlightColor]     // HEX like "#d9d9d9"
+ * @property {string} [startChar]
+ * @property {string} [endChar]
+ * @property {boolean} [deleteDelims]
+ * @property {boolean} [includeDelims]
+ * @property {string|number} [fontSize]
+ * @property {boolean} [bold]
+ * @property {boolean} [italic]
+ * @property {boolean} [underline]
+ */
 
 /**
  * Builds a decorated text widget showing a style name with an "Edit" button.
  * The button passes the style data to the `onEditStyle_` handler.
  *
  * @param {string} styleName  The name of the style.
- * @param {Object} styleData  The style configuration object.
+ * @param {StyleData} styleData  The style configuration object.
  * @return {CardService.DecoratedText} Decorated text widget with edit button.
  */
 function styleNameAndEditCard(styleName, styleData) {
@@ -107,7 +122,7 @@ function tipsButtonCard() {
 /**
  * Builds a text input for font family.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.TextInput} Font input widget.
  */
 function fontInputCard(styleData) {
@@ -122,7 +137,7 @@ function fontInputCard(styleData) {
 /**
  * Builds a text input for text (foreground) color.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.TextInput} Text color input widget.
  */
 function textColorCard(styleData) {
@@ -137,7 +152,7 @@ function textColorCard(styleData) {
 /**
  * Builds a text input for highlight (background) color.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.TextInput} Highlight color input widget.
  */
 function highlightColorCard(styleData) {
@@ -152,7 +167,7 @@ function highlightColorCard(styleData) {
 /**
  * Builds a text input for the start delimiter character(s).
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.TextInput} Start delimiter input widget.
  */
 function startCharCard(styleData) {
@@ -167,7 +182,7 @@ function startCharCard(styleData) {
 /**
  * Builds a text input for the end delimiter character(s).
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.TextInput} End delimiter input widget.
  */
 function endCharCard(styleData) {
@@ -182,7 +197,7 @@ function endCharCard(styleData) {
 /**
  * Builds a switch for deleting delimiters after styling.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.DecoratedText} Switch widget.
  */
 function deleteSwitchCard(styleData) {
@@ -201,7 +216,7 @@ function deleteSwitchCard(styleData) {
 /**
  * Builds a switch for including delimiters in the styling.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.DecoratedText} Switch widget.
  */
 function includeSwitchCard(styleData) {
@@ -221,7 +236,7 @@ function includeSwitchCard(styleData) {
  * Builds a button to toggle advanced styling options.
  *
  * @param {string} styleName  The style name.
- * @param {Object} styleData  The style configuration object.
+ * @param {StyleData} styleData  The style configuration object.
  * @param {boolean} showAdv  Whether advanced options are currently shown.
  * @return {CardService.TextButton} Toggle button widget.
  */
@@ -244,7 +259,7 @@ function viewMoreCard(styleName, styleData, showAdv) {
 /**
  * Builds a text input for font size.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.TextInput} Font size input widget.
  */
 function fontSizeCard(styleData) {
@@ -259,7 +274,7 @@ function fontSizeCard(styleData) {
 /**
  * Builds a switch for toggling bold style.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.DecoratedText} Bold switch widget.
  */
 function boldSwitchCard(styleData) {
@@ -278,7 +293,7 @@ function boldSwitchCard(styleData) {
 /**
  * Builds a switch for toggling italic style.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.DecoratedText} Italic switch widget.
  */
 function italicSwitchCard(styleData) {
@@ -297,7 +312,7 @@ function italicSwitchCard(styleData) {
 /**
  * Builds a switch for toggling underline style.
  *
- * @param {Object} styleData  The style configuration.
+ * @param {StyleData} styleData  The style configuration.
  * @return {CardService.DecoratedText} Underline switch widget.
  */
 function underlineSwitchCard(styleData) {
