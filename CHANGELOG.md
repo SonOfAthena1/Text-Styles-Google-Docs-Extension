@@ -13,11 +13,11 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Changed
 - Switched the order of buttons so that 'Save Style' button comes before the 'Apply Style' button. This should improve the UX because users should always try to save styles before using them.
 - Updated the instructions paragraph in `descriptionCard()` to be much more detailed and up-to-date.
-- Adjusted `collectConfigFromForm()` so that the method knows if it's being used during an apply style or save style. If its being used during an apply style, it will check to see if the extra styling options exist, and if not, look for their values in a saved version of the style (if exists).
-- Adjusted the use of `collectConfigFromForm()` in EventHandlers.gs to refelct its new functionality.
+- Adjusted `collectConfigFromForm()` so that the method knows if it's being used during an apply style or save style. If it's being used during an apply style, it will check to see if the extra styling options exist, and if not, look for their values in a saved version of the style (if exists).
+- Adjusted the use of `collectConfigFromForm()` in EventHandlers.gs to reflect its new functionality.
 
 ## Fixed
-- Fixed the bug that would happen when users wouldn't have 'View more styling options' clicked and therefore clicking 'Apply Styles' would result in none of the extra styling options being applied, like Bolded or Underlined, even if the style was saved with some of the extra styling options being enabled. 
+- Fixed the bug that would happen when users wouldn't have 'View more styling options' clicked, and therefore clicking 'Apply Styles' would result in none of the extra styling options being applied, like Bolded or Underlined, even if the style was saved with some of the extra styling options being enabled. 
 
 
 ## [1.1.1] - 2025-09-13
