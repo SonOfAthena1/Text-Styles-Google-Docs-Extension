@@ -9,6 +9,19 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
+## [1.1.3] - 2025-09-14
+### Added
+- Added a warning paragraph to the style UI reminding users to click SAVE before clicking VIEW LESS.
+
+### Changed
+- Changed confirm delete button labels from `"No"`/`"Yes"` to clearer `"No, don't delete"` and `"Yes, delete it"`.
+- Added `clickedViewMore: '1'` flag in `viewMoreCard()` and updated `onEditStyle_()` handling to get `styleData` from current form inputs if `onEditStyle_()` gets called from `viewMoreCard()`.
+- Updated JSDoc comment for `onEditStyle_()`.
+
+### Fixed
+- Fixed bug where form inputs would reset to defaults or last saved values when clicking **View more styling options** or **View less**.  
+
+
 ## [1.1.2] - 2025-09-13
 ### Changed
 - Switched the order of buttons so that 'Save Style' button comes before the 'Apply Style' button. This should improve the UX because users should always try to save styles before using them.
@@ -99,7 +112,8 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.1.0/
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
-[Unreleased]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.0.0...v1.1.0
