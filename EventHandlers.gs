@@ -67,11 +67,20 @@ function deleteSavedStyle_(e) {
 function onEditStyle_(e) {
   let styleName = e?.parameters?.name || "";
   let styleData;
-  try {
-    styleData = e?.parameters?.data ? JSON.parse(e.parameters.data) : {};
-  } catch(er) {
-    console.error(er);
-    styleData = {};
+  if (!e?.parameters?.clickedViewMore) {
+    console.log("Got it from normal");
+    try {
+      styleData = e?.parameters?.data ? JSON.parse(e.parameters.data) : {};
+    } catch(er) {
+      console.error(er);
+      styleData = {};
+    }
+  }
+  else {
+    console.log("Got it from collect config");
+    const form = e?.commonEventObject?.formInputs;
+    styleName = form ? String(form.style_name?.stringInputs.value[0] || "default").trim() : styleName;
+    styleData = collectConfigFromForm(form, false);
   }
   let showAdv = e?.parameters?.showAdvanced === '1';
 

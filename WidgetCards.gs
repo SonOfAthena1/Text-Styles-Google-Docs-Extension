@@ -250,7 +250,8 @@ function viewMoreCard(styleName, styleData, showAdv) {
           .setParameters({
             name: String(styleName),
             data: JSON.stringify(styleData),
-            showAdvanced: showAdv ? '0' : '1'
+            showAdvanced: showAdv ? '0' : '1',
+            clickedViewMore: '1'
           })
       )
   );
