@@ -60,6 +60,7 @@ function deleteSavedStyle_(e) {
  * - Reads style name, data, and advanced toggle state from parameters.
  * - Builds a new style card with the provided data.
  * - Navigates to the new card in the UI.
+ * - If this method is being called from the View More button, it will use the data from the current form inputs instead of saved or default data. 
  *
  * @param {GoogleAppsScript.Events.EventObject} e  The event object containing parameters.
  * @returns {GoogleAppsScript.Card_Service.ActionResponse} An action response updating the navigation stack.
