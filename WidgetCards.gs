@@ -426,7 +426,7 @@ function yesAndNoConfirmDeleteButtons(name) {
     CardService.newButtonSet()
       .addButton(
         CardService.newTextButton()
-          .setText('No')
+          .setText('No, don\'t delete')
           .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
           .setOnClickAction(
             CardService.newAction()
@@ -440,7 +440,7 @@ function yesAndNoConfirmDeleteButtons(name) {
       )
       .addButton(
         CardService.newTextButton()
-          .setText('Yes')
+          .setText('Yes, delete it')
           .setTextButtonStyle(CardService.TextButtonStyle.FILLED_TONAL)
           .setOnClickAction(
             CardService.newAction()
