@@ -44,6 +44,9 @@ function styleCard(styleName, styleData, showAdv) {
   else {
     section
       .addWidget(
+        advOptionsSavingInstructions()
+      )
+      .addWidget(
         fontSizeCard(styleData)
       )
       .addWidget(

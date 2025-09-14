@@ -258,6 +258,19 @@ function viewMoreCard(styleName, styleData, showAdv) {
 }
 
 /**
+ * Builds a paragraph with a short warning to users to click SAVE before clicking VIEW LESS.
+ *
+ * @return {CardService.TextParagraph} Description paragraph widget.
+ */
+function advOptionsSavingInstructions() {
+  return (
+    CardService.newTextParagraph().setText(
+      'CLICK \'Save\' BEFORE clicking \'View Less\''
+    )
+  )
+}
+
+/**
  * Builds a text input for font size.
  *
  * @param {StyleData} styleData  The style configuration.
