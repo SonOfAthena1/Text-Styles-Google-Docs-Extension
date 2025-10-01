@@ -34,7 +34,7 @@ function loadStylesData() {
     console.error(e);
     parsedJSON = {};
   }
-  console.log("Local storage is: " + JSON.stringify(parsedJSON));
+  // console.log("Local storage is: " + JSON.stringify(parsedJSON));
 
   /*
     if(Object.keys(parsedJSON).length === 0){

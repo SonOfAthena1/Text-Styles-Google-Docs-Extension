@@ -29,7 +29,7 @@
  * @return {CardService.DecoratedText} Decorated text widget with edit button.
  */
 function styleNameAndEditCard(styleName, styleData) {
-  console.log(JSON.stringify(styleData));
+  // console.log(JSON.stringify(styleData));
   return (
     CardService.newDecoratedText()
       .setText(styleName)
