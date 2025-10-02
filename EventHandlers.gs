@@ -20,7 +20,7 @@ function saveStyle_(e) {
   const name = String(form?.style_name?.stringInputs?.value?.[0] || '').trim();
   if (!name) return createResultNotification({ message: 'Please enter a style name.' });
 
-  const cfg = collectConfigFromForm(form, false);
+  const cfg = collectConfigFromForm(form);
   try {
     addStyleAndSave(name, cfg);
     return createResultNotification({ message: `Saved style "${name}".` });
@@ -81,7 +81,7 @@ function onEditStyle_(e) {
     // console.log("Got it from collect config");
     const form = e?.commonEventObject?.formInputs;
     styleName = form ? String(form.style_name?.stringInputs.value[0] || "default").trim() : styleName;
-    styleData = collectConfigFromForm(form, false);
+    styleData = collectConfigFromForm(form);
   }
   let showAdv = e?.parameters?.showAdvanced === '1';
 
@@ -105,7 +105,7 @@ function onEditStyle_(e) {
 function applyStyle_(e) {
   const form = e?.commonEventObject?.formInputs;
   const name = String(form?.style_name?.stringInputs?.value?.[0] || 'Untitled').trim();
-  const cfg = collectConfigFromForm(form, true);
+  const cfg = collectConfigFromForm(form);
 
   let count = applyStyleToDoc(cfg);
 

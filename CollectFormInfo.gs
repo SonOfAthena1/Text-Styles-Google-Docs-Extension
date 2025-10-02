@@ -21,7 +21,6 @@
  * @param {Object} form.underline_switch - Switch control for underline styling.
  * @param {Object} form.include_switch - Switch control for including delimiters.
  * @param {Object} form.delete_switch - Switch control for deleting delimiters.
- * @param {boolean} applyingStyle  Whether or not this method is being called to apply a style or save one.
  *
  * @returns {Object} A style configuration object with the following properties:
  * @returns {string} return.font - Selected font name.
@@ -37,7 +36,7 @@
  * @returns {boolean} return.deleteDelims - Whether to delete delimiters after applying.
  *
  */
-function collectConfigFromForm(form, applyingStyle) {
+function collectConfigFromForm(form) {
   let defaults = DEFAULT_STYLE_JSON_OBJ["default"];
 
   let styleName, font, textColor, highlightColor, fontSize, bold, italic, underline,
@@ -59,7 +58,7 @@ function collectConfigFromForm(form, applyingStyle) {
       fontSize = Math.min(Math.max(fontSize, 2), 200);
     }
 
-    if(applyingStyle && !form.bold_switch && !form.italic_switch && !form.underline_switch) {
+    if(!form.bold_switch && !form.italic_switch && !form.underline_switch) {
       styleData = getStyle(styleName) ?? defaults;
       bold = styleData.bold;
       italic = styleData.italic;
