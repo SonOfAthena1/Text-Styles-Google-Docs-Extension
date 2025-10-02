@@ -9,6 +9,15 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
+## [1.1.5] - 2025-10-01
+### Changed
+- `collectConfigFromForm()` to only take in one input, as the applyingStyle boolean was actually causing a bug in the one place it was used.
+- `collectConfigFromForm()` now looks at the latest saved fontSize data for a Style if the font size input field doesn't exist (i.e., it's not being rendered).
+
+### Fixed
+- A bug where the system was correctly getting the values for the advanced styling options when applying the style but only rendering the default values in the UI (i.e., all the switches like bold were always showed as off and the font size was always rendered as 11). 
+
+
 ## [1.1.4] - 2025-10-01
 ### Changed
 - Add-on icon to be circular with transparent background instead of circular with white background.
