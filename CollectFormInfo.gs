@@ -50,16 +50,17 @@ function collectConfigFromForm(form) {
     highlightColor = String(form.color?.stringInputs.value[0] || defaults.highlightColor).trim();
     startChar = String(form.character1?.stringInputs.value[0] || defaults.startChar).trim();
     endChar = String(form.character2?.stringInputs.value[0] || defaults.endChar).trim();
-    fontSize = Number(String(form.font_size?.stringInputs.value[0] || defaults.fontSize).trim()) || 11;
+    fontSize = Number(String(form.font_size?.stringInputs.value[0] || defaults.fontSize).trim()) || defaults.fontSize;
 
     if (!Number.isFinite(fontSize) || fontSize <= 0) {
-      fontSize = 11; // fallback
+      fontSize = defaults.fontSize; // fallback
     } else {
       fontSize = Math.min(Math.max(fontSize, 2), 200);
     }
 
-    if(!form.bold_switch && !form.italic_switch && !form.underline_switch) {
+    if(!form.font_size && !form.bold_switch && !form.italic_switch && !form.underline_switch) {
       styleData = getStyle(styleName) ?? defaults;
+      fontSize = styleData.fontSize;
       bold = styleData.bold;
       italic = styleData.italic;
       underline = styleData.underline;
