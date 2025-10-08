@@ -1,4 +1,5 @@
-
+// SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+// © 2025 Leland Cuellar — Commercial use requires a separate license.
 
 /**
  * Collects and normalizes style configuration values from a form input.

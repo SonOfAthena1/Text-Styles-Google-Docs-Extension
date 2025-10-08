@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+// © 2025 Leland Cuellar — Commercial use requires a separate license.
 
 const KEY = 'SAVED_STYLES_V1';
 

@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+// © 2025 Leland Cuellar — Commercial use requires a separate license.
+
 /**
  * @module ButtonClickEventHandlers
  * Functions that handle button clicks and other similar events.
