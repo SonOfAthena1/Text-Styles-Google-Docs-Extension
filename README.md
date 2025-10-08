@@ -82,3 +82,9 @@ Saved styles are persisted in **UserProperties** as JSON objects keyed by style 
 Switches post a value **only when selected**. Presence in `formInputs` means **ON**:
 ```js
 if (form.delete_switch) deleteDelims = true;
+```
+
+## License
+Source-available under **PolyForm Noncommercial 1.0.0**.  
+Commercial use requires a separate license — contact soccerlc0095@gmail.com.
+See [LICENSE](./LICENSE) for details.
