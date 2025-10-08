@@ -86,5 +86,5 @@ if (form.delete_switch) deleteDelims = true;
 
 ## License
 Source-available under **PolyForm Noncommercial 1.0.0**.  
-Commercial use requires a separate license — contact soccerlc0095@gmail.com.
-See [LICENSE](./LICENSE) for details.
+Commercial use requires a separate license — contact soccerlc0095@gmail.com. See [LICENSE](./LICENSE) for details.  
+“Text Styles™” and associated logos are trademarks of Leland Cuellar.
