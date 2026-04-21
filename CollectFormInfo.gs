@@ -38,14 +38,14 @@
  *
  */
 function collectConfigFromForm(form) {
-  let defaults = DEFAULT_STYLE_JSON_OBJ["default"];
+  let defaults = DEFAULT_STYLE_JSON_OBJ[DEFAULT_STYLE_KEY];
 
   let styleName, font, textColor, highlightColor, fontSize, bold, italic, underline,
       startChar, endChar, includeDelims, deleteDelims;
   let styleData;
 
   if (form) {
-    styleName = String(form.style_name?.stringInputs.value[0] || "default").trim();
+    styleName = normalizeStyleNameForStorage(form.style_name?.stringInputs.value?.[0] ?? '');
     font = String(form.font?.stringInputs.value[0] || defaults.font).trim();
     textColor = String(form.text_color?.stringInputs.value[0] || defaults.textColor).trim();
     highlightColor = String(form.color?.stringInputs.value[0] || defaults.highlightColor).trim();
