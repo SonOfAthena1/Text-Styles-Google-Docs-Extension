@@ -36,6 +36,13 @@ function loadStylesData() {
     console.error(e);
     parsedJSON = {};
   }
+
+  // Ensure a default style always exists in storage.
+  if (!parsedJSON.default) {
+    parsedJSON.default = DEFAULT_STYLE_JSON_OBJ.default;
+    saveStylesObjToLocal(parsedJSON);
+  }
+
   // console.log("Local storage is: " + JSON.stringify(parsedJSON));
 
   /*
@@ -81,6 +88,7 @@ function addStyleAndSave(name, config) {
  * @param {string} name  The style name to remove.
  */
 function deleteStyle(name) {
+  if (name === 'default') return;
   const styles = loadStylesData();
   if (styles[name]) {
     delete styles[name];

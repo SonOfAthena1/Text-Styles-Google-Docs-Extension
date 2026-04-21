@@ -59,6 +59,7 @@ function styleNameAndEditCard(styleName, styleData) {
  * @return {CardService.TextButton} New style button widget.
  */
 function createNewStyleButton() {
+  const defaultStyleData = getStyle('default') || DEFAULT_STYLE_JSON_OBJ["default"];
   return (
     CardService.newTextButton()
       .setText('+')
@@ -67,7 +68,7 @@ function createNewStyleButton() {
           .setFunctionName('onEditStyle_')
           .setParameters({
             name: "default",
-            data: JSON.stringify(DEFAULT_STYLE_JSON_OBJ["default"]),
+            data: JSON.stringify(defaultStyleData),
             showAdvanced: '0'
           })
       )

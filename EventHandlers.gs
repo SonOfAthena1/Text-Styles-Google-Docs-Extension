@@ -46,6 +46,7 @@ function saveStyle_(e) {
 function deleteSavedStyle_(e) {
   const name = String(e?.parameters.styleName || '').trim();
   if (!name) return createResultNotification({ message: 'Select a saved style first.' });
+  if (name === 'default') return createResultNotification({ message: 'Default style cannot be deleted.' });
 
   deleteStyle(name);
   return cardPage(
