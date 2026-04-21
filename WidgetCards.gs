@@ -35,7 +35,7 @@ function styleNameAndEditCard(styleName, styleData) {
   // console.log(JSON.stringify(styleData));
   return (
     CardService.newDecoratedText()
-      .setText(styleName)
+      .setText(getStyleDisplayName(styleName))
       .setButton(
         CardService.newTextButton()
           .setText("Edit")
@@ -59,7 +59,7 @@ function styleNameAndEditCard(styleName, styleData) {
  * @return {CardService.TextButton} New style button widget.
  */
 function createNewStyleButton() {
-  const defaultStyleData = getStyle('default') || DEFAULT_STYLE_JSON_OBJ["default"];
+  const defaultStyleData = getStyle(DEFAULT_STYLE_KEY) || DEFAULT_STYLE_JSON_OBJ[DEFAULT_STYLE_KEY];
   return (
     CardService.newTextButton()
       .setText('+')
@@ -67,7 +67,7 @@ function createNewStyleButton() {
         CardService.newAction()
           .setFunctionName('onEditStyle_')
           .setParameters({
-            name: "default",
+            name: '',
             data: JSON.stringify(defaultStyleData),
             showAdvanced: '0'
           })
@@ -86,7 +86,7 @@ function styleNameInputCard(styleName) {
     CardService.newTextInput()
       .setTitle('Style Name')
       .setFieldName('style_name')
-      .setValue(styleName)
+      .setValue(getStyleDisplayName(styleName))
   );
 }
 

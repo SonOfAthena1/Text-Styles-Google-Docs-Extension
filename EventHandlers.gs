@@ -20,13 +20,13 @@
  */
 function saveStyle_(e) {
   const form = e?.commonEventObject?.formInputs;
-  const name = String(form?.style_name?.stringInputs?.value?.[0] || '').trim();
+  const name = normalizeStyleNameForStorage(form?.style_name?.stringInputs?.value?.[0] || '');
   if (!name) return createResultNotification({ message: 'Please enter a style name.' });
 
   const cfg = collectConfigFromForm(form);
   try {
     addStyleAndSave(name, cfg);
-    return createResultNotification({ message: `Saved style "${name}".` });
+    return createResultNotification({ message: `Saved style "${getStyleDisplayName(name)}".` });
   } catch (err) {
     return createResultNotification({ message: `Failed to save: ${err.message}` });
   }
@@ -44,9 +44,9 @@ function saveStyle_(e) {
  * @returns {GoogleAppsScript.Card_Service.ActionResponse} An action response updating the card.
  */
 function deleteSavedStyle_(e) {
-  const name = String(e?.parameters.styleName || '').trim();
+  const name = normalizeStyleNameForStorage(e?.parameters.styleName || '');
   if (!name) return createResultNotification({ message: 'Select a saved style first.' });
-  if (name === 'default') return createResultNotification({ message: 'Default style cannot be deleted.' });
+  if (name === DEFAULT_STYLE_KEY) return createResultNotification({ message: `${DEFAULT_STYLE_DISPLAY_NAME} cannot be deleted.` });
 
   deleteStyle(name);
   return cardPage(
@@ -84,7 +84,7 @@ function onEditStyle_(e) {
   else {
     // console.log("Got it from collect config");
     const form = e?.commonEventObject?.formInputs;
-    styleName = form ? String(form.style_name?.stringInputs.value[0] || "default").trim() : styleName;
+    styleName = form ? normalizeStyleNameForStorage(form.style_name?.stringInputs.value?.[0] ?? '') : styleName;
     styleData = collectConfigFromForm(form);
   }
   let showAdv = e?.parameters?.showAdvanced === '1';
@@ -108,7 +108,7 @@ function onEditStyle_(e) {
  */
 function applyStyle_(e) {
   const form = e?.commonEventObject?.formInputs;
-  const name = String(form?.style_name?.stringInputs?.value?.[0] || 'Untitled').trim();
+  const name = normalizeStyleNameForStorage(form?.style_name?.stringInputs?.value?.[0] || 'Untitled');
   const cfg = collectConfigFromForm(form);
 
   let count = applyStyleToDoc(cfg);
@@ -121,7 +121,7 @@ function applyStyle_(e) {
 
   // Show result message
   let msg = 'Updated ' + count + ' occurrence' + (count === 1 ? '' : 's') +
-            ' with the styling options set for ' + name + '.';
+            ' with the styling options set for ' + getStyleDisplayName(name) + '.';
 
   return createResultNotification({message: msg});
 }
@@ -170,7 +170,7 @@ function goBackToHome_() {
  */
 function showConfirmCard_(e) {
   const form = e?.commonEventObject?.formInputs;
-  const name = String(form?.style_name?.stringInputs?.value?.[0] || 'Untitled').trim();
+  const name = normalizeStyleNameForStorage(form?.style_name?.stringInputs?.value?.[0] || 'Untitled');
 
   return (
     cardPage(
@@ -185,7 +185,5 @@ function showConfirmCard_(e) {
     )
   )
 }
-
-
 
 
