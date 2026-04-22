@@ -213,7 +213,7 @@ function deleteSwitchCard(styleData) {
         CardService.newSwitch()
           .setFieldName('delete_switch')       // form key
           .setValue('true')                    // value sent when ON
-          .setSelected(styleData.deleteDelims) // start value
+          .setSelected(!!styleData.deleteDelims) // start value, using !! to safe coerce to boolean
       )
   );
 }
@@ -232,7 +232,7 @@ function includeSwitchCard(styleData) {
         CardService.newSwitch()
           .setFieldName('include_switch')
           .setValue('true')
-          .setSelected(styleData.includeDelims)
+          .setSelected(!!styleData.includeDelims)
       )
   );
 }
@@ -304,7 +304,7 @@ function transparentHighlightSwitch(styleData) {
         CardService.newSwitch()
           .setFieldName('transparent_switch')
           .setValue('true')
-          .setSelected(styleData.transparentHighlight)
+          .setSelected(!!styleData.transparentHighlight)
       )
   );
 }
@@ -323,7 +323,7 @@ function boldSwitchCard(styleData) {
         CardService.newSwitch()
           .setFieldName('bold_switch')
           .setValue('true')
-          .setSelected(styleData.bold)
+          .setSelected(!!styleData.bold)
       )
   );
 }
@@ -342,7 +342,7 @@ function italicSwitchCard(styleData) {
         CardService.newSwitch()
           .setFieldName('italic_switch')
           .setValue('true')
-          .setSelected(styleData.italic)
+          .setSelected(!!styleData.italic)
       )
   );
 }
@@ -361,7 +361,7 @@ function underlineSwitchCard(styleData) {
         CardService.newSwitch()
           .setFieldName('underline_switch')
           .setValue('true')
-          .setSelected(styleData.underline)
+          .setSelected(!!styleData.underline)
       )
   );
 }

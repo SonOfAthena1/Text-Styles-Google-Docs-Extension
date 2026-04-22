@@ -64,10 +64,10 @@ function collectConfigFromForm(form) {
     if(!form.font_size && !form.bold_switch && !form.italic_switch && !form.underline_switch) {
       styleData = getStyle(styleName) ?? defaults;
       fontSize = styleData.fontSize;
-      bold = styleData.bold;
-      italic = styleData.italic;
-      underline = styleData.underline;
-      transparentHighlight = styleData.transparentHighlight;
+      bold = !!styleData.bold;
+      italic = !!styleData.italic;
+      underline = !!styleData.underline;
+      transparentHighlight = !!styleData.transparentHighlight;
     } 
     else {
       bold = !!form.bold_switch;
