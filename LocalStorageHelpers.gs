@@ -17,7 +17,7 @@ const DEFAULT_STYLE_JSON_OBJ = {
     startChar: '<',
     endChar: '>',
     includeDelims: true,
-    deleteDelims: true,
+    deleteDelims: false,
     transparentHighlight: false
   }
 }

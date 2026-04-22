@@ -13,6 +13,7 @@
  * @param {string} styleConfig.textColor - Foreground (text) color in HEX (e.g. "#000000").
  * @param {string} styleConfig.highlightColor - Background (highlight) color in HEX (e.g. "#efefef").
  * @param {number} styleConfig.fontSize - Font size in points.
+ * @param {boolean} styleConfig.transparentHighlight - Whether to clear/skip highlight color.
  * @param {boolean} styleConfig.bold - Whether to apply bold formatting.
  * @param {boolean} styleConfig.italic - Whether to apply italic formatting.
  * @param {boolean} styleConfig.underline - Whether to apply underline formatting.
@@ -49,6 +50,8 @@ function applyStyleToDoc(styleConfig) {
         t.setForegroundColor(styleStart, styleEnd, styleConfig.textColor);
         if (!styleConfig.transparentHighlight) {
           t.setBackgroundColor(styleStart, styleEnd, styleConfig.highlightColor);
+        } else {
+          t.setBackgroundColor(styleStart, styleEnd, null);
         }
         t.setBold(styleStart, styleEnd, styleConfig.bold);
         t.setItalic(styleStart, styleEnd, styleConfig.italic);

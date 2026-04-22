@@ -18,6 +18,7 @@
  * @property {boolean} [deleteDelims]
  * @property {boolean} [includeDelims]
  * @property {string|number} [fontSize]
+ * @property {boolean} [transparentHighlight]
  * @property {boolean} [bold]
  * @property {boolean} [italic]
  * @property {boolean} [underline]

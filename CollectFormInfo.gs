@@ -22,7 +22,7 @@
  * @param {Object} form.underline_switch - Switch control for underline styling.
  * @param {Object} form.include_switch - Switch control for including delimiters.
  * @param {Object} form.delete_switch - Switch control for deleting delimiters.
- * @param {object} form.transparent_switch - Switch control for transparent highlighting
+ * @param {object} form.transparent_switch - Switch control for transparent highlighting.
  *
  * @returns {Object} A style configuration object with the following properties:
  * @returns {string} return.font - Selected font name.
@@ -67,13 +67,13 @@ function collectConfigFromForm(form) {
       bold = styleData.bold;
       italic = styleData.italic;
       underline = styleData.underline;
-      transparentHighlight = styleData.transparentHighlight
+      transparentHighlight = styleData.transparentHighlight;
     } 
     else {
       bold = !!form.bold_switch;
       italic = !!form.italic_switch;
       underline = !!form.underline_switch;
-      transparentHighlight = !!form.transparent_switch
+      transparentHighlight = !!form.transparent_switch;
     }
     includeDelims = !!form.include_switch;
     deleteDelims = !!form.delete_switch;
@@ -85,5 +85,5 @@ function collectConfigFromForm(form) {
 
   // Automatically maps variable names to variable values.
   return { font, textColor, highlightColor, fontSize, bold, italic, underline,
-           startChar, endChar, includeDelims, deleteDelims };
+           startChar, endChar, includeDelims, deleteDelims, transparentHighlight };
 }
