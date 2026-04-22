@@ -53,6 +53,9 @@ function styleCard(styleName, styleData, showAdv) {
         fontSizeCard(styleData)
       )
       .addWidget(
+        transparentHighlightSwitch(styleData)
+      )
+      .addWidget(
         boldSwitchCard(styleData)
       )
       .addWidget(

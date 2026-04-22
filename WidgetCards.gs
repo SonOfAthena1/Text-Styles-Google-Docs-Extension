@@ -290,6 +290,25 @@ function fontSizeCard(styleData) {
 }
 
 /**
+ * Builds a switch for toggling transparent highlight.
+ *
+ * @param {StyleData} styleData  The style configuration.
+ * @return {CardService.DecoratedText} Transparent highlight switch widget.
+ */
+function transparentHighlightSwitch(styleData) {
+  return (
+    CardService.newDecoratedText()
+      .setText('Transparent Highlight')
+      .setSwitchControl(
+        CardService.newSwitch()
+          .setFieldName('transparent_switch')
+          .setValue('true')
+          .setSelected(styleData.transparentHighlight)
+      )
+  );
+}
+
+/**
  * Builds a switch for toggling bold style.
  *
  * @param {StyleData} styleData  The style configuration.

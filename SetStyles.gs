@@ -47,7 +47,9 @@ function applyStyleToDoc(styleConfig) {
         t.setFontFamily(styleStart, styleEnd, styleConfig.font);
         t.setFontSize(styleStart, styleEnd, styleConfig.fontSize);
         t.setForegroundColor(styleStart, styleEnd, styleConfig.textColor);
-        t.setBackgroundColor(styleStart, styleEnd, styleConfig.highlightColor);
+        if (!styleConfig.transparentHighlight) {
+          t.setBackgroundColor(styleStart, styleEnd, styleConfig.highlightColor);
+        }
         t.setBold(styleStart, styleEnd, styleConfig.bold);
         t.setItalic(styleStart, styleEnd, styleConfig.italic);
         t.setUnderline(styleStart, styleEnd, styleConfig.underline);
