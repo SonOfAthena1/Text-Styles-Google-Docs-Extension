@@ -9,6 +9,23 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 ### Removed
 
+
+## [1.2.0] - 2026-04-23
+### Added
+- Added support for editing and saving the **default style** settings, so users can customize the baseline style instead of being locked to hardcoded defaults.
+- Added a **transparent highlight** option in advanced styling settings.
+
+### Changed
+- Moved the `includeDelims` switch into advanced styling options to keep primary controls cleaner.
+- Updated advanced option labels/switch text for better fit and readability in the card UI.
+- Hardened `collectConfigFromForm()` with additional type and null/undefined safety checks.
+
+### Fixed
+- Fixed loading of advanced options so saved default-style values are used correctly (instead of hardcoded fallbacks).
+- Fixed a transparent-highlight compatibility issue where legacy saved styles could pass `null` and break advanced-options rendering.
+- Fixed a small variable-reference bug affecting style configuration handling.
+
+
 ## [1.1.5] - 2025-10-01
 ### Changed
 - `collectConfigFromForm()` to only take in one input, as the applyingStyle boolean was actually causing a bug in the one place it was used.
@@ -128,9 +145,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Fixed
 - “Continue Styling” button now uses a supported navigation flow.
 
-[Keep a Changelog]: https://keepachangelog.com/en/1.1.0/
+[Keep a Changelog]: https://keepachangelog.com/en/1.2.0/
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
-[Unreleased]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.5...HEAD
+[Unreleased]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.5...1.2.0
 [1.1.5]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.4...v1.1.5
 [1.1.4]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.3...v1.1.4
 [1.1.3]: https://github.com/SonOfAthena1/Text-Styles-Google-Docs-Extension/compare/v1.1.2...v1.1.3
