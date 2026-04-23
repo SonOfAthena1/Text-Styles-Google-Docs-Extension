@@ -65,11 +65,12 @@ function collectConfigFromForm(form) {
     // If all adv options are false or null (don't exist)
     if(!form.font_size && !form.bold_switch && !form.italic_switch && !form.underline_switch && !form.transparent_switch) {
       styleData = getStyle(styleName) ?? defaults;
-      fontSize = styleData.fontSize;
-      bold = !!styleData.bold;
-      italic = !!styleData.italic;
-      underline = !!styleData.underline;
-      transparentHighlight = !!styleData.transparentHighlight; //Just in case evals to null from prev saved styles
+      fontSize = Number(styleData.fontSize ?? defaults.fontSize);
+      bold = !!(styleData.bold ?? defaults.bold);
+      italic = !!(styleData.italic ?? defaults.italic);
+      underline = !!(styleData.underline ?? defaults.underline);
+      transparentHighlight = !!(styleData.transparentHighlight ?? defaults.transparentHighlight); 
+      //Just in case evals to null from prev saved styles
     } 
     else {
       bold = !!form.bold_switch;
