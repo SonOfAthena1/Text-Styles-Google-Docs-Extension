@@ -14,7 +14,7 @@ function onHomepage(e) {
   return buildCard_();
 }
 
-const VERSION = '1.1.5';
+const VERSION = '1.2.0';
 
 /**
  * Builds the main style selection card with all saved styles.
@@ -30,7 +30,13 @@ function buildCard_() {
 
   let section = CardService.newCardSection();
 
-  Object.entries(jsonObject).forEach(([styleName, styleData]) => {
+  const sortedStyles = Object.entries(jsonObject).sort(([a], [b]) => {
+    if (a === DEFAULT_STYLE_KEY) return -1;
+    if (b === DEFAULT_STYLE_KEY) return 1;
+    return a.localeCompare(b);
+  });
+
+  sortedStyles.forEach(([styleName, styleData]) => {
     section.addWidget(
       styleNameAndEditCard(styleName, styleData)
     );
@@ -42,5 +48,4 @@ function buildCard_() {
 
   return cardPage(`Version ${VERSION}`, section);
 }
-
 

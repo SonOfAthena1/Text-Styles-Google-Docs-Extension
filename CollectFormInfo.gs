@@ -22,6 +22,7 @@
  * @param {Object} form.underline_switch - Switch control for underline styling.
  * @param {Object} form.include_switch - Switch control for including delimiters.
  * @param {Object} form.delete_switch - Switch control for deleting delimiters.
+ * @param {object} form.transparent_switch - Switch control for transparent highlighting.
  *
  * @returns {Object} A style configuration object with the following properties:
  * @returns {string} return.font - Selected font name.
@@ -35,17 +36,19 @@
  * @returns {string} return.endChar - Ending delimiter character(s).
  * @returns {boolean} return.includeDelims - Whether to include delimiters in styling.
  * @returns {boolean} return.deleteDelims - Whether to delete delimiters after applying.
+ * @returns {boolean} return.transparentHighlight - Whether to apply a highlight color or not.
  *
  */
 function collectConfigFromForm(form) {
-  let defaults = DEFAULT_STYLE_JSON_OBJ["default"];
+  const persistedDefaultStyle = getStyle(DEFAULT_STYLE_KEY);  // Saved default
+  let defaults = persistedDefaultStyle ?? DEFAULT_STYLE_JSON_OBJ[DEFAULT_STYLE_KEY]; // If saved is for some reason null, use hardcoded
 
   let styleName, font, textColor, highlightColor, fontSize, bold, italic, underline,
-      startChar, endChar, includeDelims, deleteDelims;
+      startChar, endChar, includeDelims, deleteDelims, transparentHighlight;
   let styleData;
 
   if (form) {
-    styleName = String(form.style_name?.stringInputs.value[0] || "default").trim();
+    styleName = normalizeStyleNameForStorage(form.style_name?.stringInputs.value?.[0] ?? '');
     font = String(form.font?.stringInputs.value[0] || defaults.font).trim();
     textColor = String(form.text_color?.stringInputs.value[0] || defaults.textColor).trim();
     highlightColor = String(form.color?.stringInputs.value[0] || defaults.highlightColor).trim();
@@ -59,19 +62,24 @@ function collectConfigFromForm(form) {
       fontSize = Math.min(Math.max(fontSize, 2), 200);
     }
 
-    if(!form.font_size && !form.bold_switch && !form.italic_switch && !form.underline_switch) {
+    // If all adv options are null/undefined (don't exist)
+    if(!form.font_size && !form.bold_switch && !form.italic_switch && !form.underline_switch && !form.transparent_switch) {
       styleData = getStyle(styleName) ?? defaults;
-      fontSize = styleData.fontSize;
-      bold = styleData.bold;
-      italic = styleData.italic;
-      underline = styleData.underline;
+      fontSize = Number(styleData.fontSize ?? defaults.fontSize);
+      bold = !!(styleData.bold ?? defaults.bold);
+      italic = !!(styleData.italic ?? defaults.italic);
+      underline = !!(styleData.underline ?? defaults.underline);
+      transparentHighlight = !!(styleData.transparentHighlight ?? defaults.transparentHighlight); 
+      includeDelims = !!(styleData.includeDelims ?? defaults.includeDelims);
+      //Just in case evals to null from prev saved styles
     } 
-    else {
+    else { // If they exist
       bold = !!form.bold_switch;
       italic = !!form.italic_switch;
       underline = !!form.underline_switch;
+      transparentHighlight = !!form.transparent_switch;
+      includeDelims = !!form.include_switch;
     }
-    includeDelims = !!form.include_switch;
     deleteDelims = !!form.delete_switch;
   }
 
@@ -81,5 +89,5 @@ function collectConfigFromForm(form) {
 
   // Automatically maps variable names to variable values.
   return { font, textColor, highlightColor, fontSize, bold, italic, underline,
-           startChar, endChar, includeDelims, deleteDelims };
+           startChar, endChar, includeDelims, deleteDelims, transparentHighlight };
 }

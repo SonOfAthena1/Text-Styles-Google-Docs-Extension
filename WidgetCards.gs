@@ -18,6 +18,7 @@
  * @property {boolean} [deleteDelims]
  * @property {boolean} [includeDelims]
  * @property {string|number} [fontSize]
+ * @property {boolean} [transparentHighlight]
  * @property {boolean} [bold]
  * @property {boolean} [italic]
  * @property {boolean} [underline]
@@ -35,7 +36,7 @@ function styleNameAndEditCard(styleName, styleData) {
   // console.log(JSON.stringify(styleData));
   return (
     CardService.newDecoratedText()
-      .setText(styleName)
+      .setText(getStyleDisplayName(styleName))
       .setButton(
         CardService.newTextButton()
           .setText("Edit")
@@ -59,6 +60,7 @@ function styleNameAndEditCard(styleName, styleData) {
  * @return {CardService.TextButton} New style button widget.
  */
 function createNewStyleButton() {
+  const defaultStyleData = getStyle(DEFAULT_STYLE_KEY) || DEFAULT_STYLE_JSON_OBJ[DEFAULT_STYLE_KEY];
   return (
     CardService.newTextButton()
       .setText('+')
@@ -66,8 +68,8 @@ function createNewStyleButton() {
         CardService.newAction()
           .setFunctionName('onEditStyle_')
           .setParameters({
-            name: "default",
-            data: JSON.stringify(DEFAULT_STYLE_JSON_OBJ["default"]),
+            name: '',
+            data: JSON.stringify(defaultStyleData),
             showAdvanced: '0'
           })
       )
@@ -85,7 +87,7 @@ function styleNameInputCard(styleName) {
     CardService.newTextInput()
       .setTitle('Style Name')
       .setFieldName('style_name')
-      .setValue(styleName)
+      .setValue(getStyleDisplayName(styleName))
   );
 }
 
@@ -206,12 +208,12 @@ function endCharCard(styleData) {
 function deleteSwitchCard(styleData) {
   return (
     CardService.newDecoratedText()
-      .setText('Delete delimiter characters with run')
+      .setText('Delete delimiter char\'s after apply')
       .setSwitchControl(
         CardService.newSwitch()
           .setFieldName('delete_switch')       // form key
           .setValue('true')                    // value sent when ON
-          .setSelected(styleData.deleteDelims) // start value
+          .setSelected(!!styleData.deleteDelims) // start value, using !! to safe coerce to boolean
       )
   );
 }
@@ -225,12 +227,12 @@ function deleteSwitchCard(styleData) {
 function includeSwitchCard(styleData) {
   return (
     CardService.newDecoratedText()
-      .setText('Include delimiter characters in style')
+      .setText('Include delimiter char\'s in style')
       .setSwitchControl(
         CardService.newSwitch()
           .setFieldName('include_switch')
           .setValue('true')
-          .setSelected(styleData.includeDelims)
+          .setSelected(!!styleData.includeDelims)
       )
   );
 }
@@ -289,6 +291,25 @@ function fontSizeCard(styleData) {
 }
 
 /**
+ * Builds a switch for toggling transparent highlight.
+ *
+ * @param {StyleData} styleData  The style configuration.
+ * @return {CardService.DecoratedText} Transparent highlight switch widget.
+ */
+function transparentHighlightSwitch(styleData) {
+  return (
+    CardService.newDecoratedText()
+      .setText('Transparent Highlight')
+      .setSwitchControl(
+        CardService.newSwitch()
+          .setFieldName('transparent_switch')
+          .setValue('true')
+          .setSelected(!!styleData.transparentHighlight)
+      )
+  );
+}
+
+/**
  * Builds a switch for toggling bold style.
  *
  * @param {StyleData} styleData  The style configuration.
@@ -302,7 +323,7 @@ function boldSwitchCard(styleData) {
         CardService.newSwitch()
           .setFieldName('bold_switch')
           .setValue('true')
-          .setSelected(styleData.bold)
+          .setSelected(!!styleData.bold)
       )
   );
 }
@@ -321,7 +342,7 @@ function italicSwitchCard(styleData) {
         CardService.newSwitch()
           .setFieldName('italic_switch')
           .setValue('true')
-          .setSelected(styleData.italic)
+          .setSelected(!!styleData.italic)
       )
   );
 }
@@ -340,7 +361,7 @@ function underlineSwitchCard(styleData) {
         CardService.newSwitch()
           .setFieldName('underline_switch')
           .setValue('true')
-          .setSelected(styleData.underline)
+          .setSelected(!!styleData.underline)
       )
   );
 }

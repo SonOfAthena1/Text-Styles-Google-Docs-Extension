@@ -2,9 +2,11 @@
 // © 2025 Leland Cuellar — Commercial use requires a separate license.
 
 const KEY = 'SAVED_STYLES_V1';
+const DEFAULT_STYLE_KEY = 'default';
+const DEFAULT_STYLE_DISPLAY_NAME = 'Default Settings';
 
 const DEFAULT_STYLE_JSON_OBJ = {
-  "default": {
+  [DEFAULT_STYLE_KEY]: {
     font: "Consolas",
     textColor: "#000000",
     highlightColor: '#efefef',
@@ -15,7 +17,8 @@ const DEFAULT_STYLE_JSON_OBJ = {
     startChar: '<',
     endChar: '>',
     includeDelims: true,
-    deleteDelims: false
+    deleteDelims: false,
+    transparentHighlight: false
   }
 }
 
@@ -36,6 +39,13 @@ function loadStylesData() {
     console.error(e);
     parsedJSON = {};
   }
+
+  // Ensure a default style always exists in storage.
+  if (!parsedJSON[DEFAULT_STYLE_KEY]) {
+    parsedJSON[DEFAULT_STYLE_KEY] = DEFAULT_STYLE_JSON_OBJ[DEFAULT_STYLE_KEY];
+    saveStylesObjToLocal(parsedJSON);
+  }
+
   // console.log("Local storage is: " + JSON.stringify(parsedJSON));
 
   /*
@@ -68,7 +78,7 @@ function saveStylesObjToLocal(stylesObj) {
  * @throws {Error} If the name is empty or only whitespace.
  */
 function addStyleAndSave(name, config) {
-  name = String(name || '').trim();
+  name = normalizeStyleNameForStorage(name);
   if (!name) throw new Error('Style name is required.');
   const styles = loadStylesData();
   styles[name] = config;
@@ -81,6 +91,8 @@ function addStyleAndSave(name, config) {
  * @param {string} name  The style name to remove.
  */
 function deleteStyle(name) {
+  name = normalizeStyleNameForStorage(name);
+  if (name === DEFAULT_STYLE_KEY) return;
   const styles = loadStylesData();
   if (styles[name]) {
     delete styles[name];
@@ -95,5 +107,33 @@ function deleteStyle(name) {
  * @returns {Object|null} The style configuration if found, otherwise null.
  */
 function getStyle(name) {
-  return loadStylesData()[name] || null;
+  return loadStylesData()[normalizeStyleNameForStorage(name)] || null;
+}
+
+/**
+ * Converts user-facing style names into storage keys.
+ *
+ * @param {string} name
+ * @returns {string}
+ */
+function normalizeStyleNameForStorage(name) {
+  const normalized = String(name || '').trim();
+  if (!normalized) return '';
+
+  const lowered = normalized.toLowerCase();
+  if (lowered === DEFAULT_STYLE_KEY || lowered === DEFAULT_STYLE_DISPLAY_NAME.toLowerCase()) {
+    return DEFAULT_STYLE_KEY;
+  }
+
+  return normalized;
+}
+
+/**
+ * Returns the UI label for a style key.
+ *
+ * @param {string} styleKey
+ * @returns {string}
+ */
+function getStyleDisplayName(styleKey) {
+  return styleKey === DEFAULT_STYLE_KEY ? DEFAULT_STYLE_DISPLAY_NAME : styleKey;
 }
