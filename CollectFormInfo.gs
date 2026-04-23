@@ -70,7 +70,7 @@ function collectConfigFromForm(form) {
       italic = !!(styleData.italic ?? defaults.italic);
       underline = !!(styleData.underline ?? defaults.underline);
       transparentHighlight = !!(styleData.transparentHighlight ?? defaults.transparentHighlight); 
-      includeDelims = !!(form.include_switch ?? defaults.include_switch);
+      includeDelims = !!(styleData.includeDelims ?? defaults.includeDelims);
       //Just in case evals to null from prev saved styles
     } 
     else { // If they exist
