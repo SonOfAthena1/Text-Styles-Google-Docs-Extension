@@ -40,7 +40,8 @@
  *
  */
 function collectConfigFromForm(form) {
-  let defaults = DEFAULT_STYLE_JSON_OBJ[DEFAULT_STYLE_KEY];
+  const persistedDefaultStyle = getStyle(DEFAULT_STYLE_KEY);  // Saved default
+  let defaults = persistedDefaultStyle ?? DEFAULT_STYLE_JSON_OBJ[DEFAULT_STYLE_KEY]; // If saved is for some reason null, use hardcoded
 
   let styleName, font, textColor, highlightColor, fontSize, bold, italic, underline,
       startChar, endChar, includeDelims, deleteDelims, transparentHighlight;
@@ -61,13 +62,14 @@ function collectConfigFromForm(form) {
       fontSize = Math.min(Math.max(fontSize, 2), 200);
     }
 
-    if(!form.font_size && !form.bold_switch && !form.italic_switch && !form.underline_switch) {
+    // If all adv options are false or null (don't exist)
+    if(!form.font_size && !form.bold_switch && !form.italic_switch && !form.underline_switch && !form.transparent_switch) {
       styleData = getStyle(styleName) ?? defaults;
       fontSize = styleData.fontSize;
       bold = !!styleData.bold;
       italic = !!styleData.italic;
       underline = !!styleData.underline;
-      transparentHighlight = !!styleData.transparentHighlight;
+      transparentHighlight = !!styleData.transparentHighlight; //Just in case evals to null from prev saved styles
     } 
     else {
       bold = !!form.bold_switch;
