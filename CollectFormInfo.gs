@@ -62,7 +62,7 @@ function collectConfigFromForm(form) {
       fontSize = Math.min(Math.max(fontSize, 2), 200);
     }
 
-    // If all adv options are false or null (don't exist)
+    // If all adv options are null/undefined (don't exist)
     if(!form.font_size && !form.bold_switch && !form.italic_switch && !form.underline_switch && !form.transparent_switch) {
       styleData = getStyle(styleName) ?? defaults;
       fontSize = Number(styleData.fontSize ?? defaults.fontSize);
@@ -70,15 +70,16 @@ function collectConfigFromForm(form) {
       italic = !!(styleData.italic ?? defaults.italic);
       underline = !!(styleData.underline ?? defaults.underline);
       transparentHighlight = !!(styleData.transparentHighlight ?? defaults.transparentHighlight); 
+      includeDelims = !!(form.include_switch ?? defaults.include_switch);
       //Just in case evals to null from prev saved styles
     } 
-    else {
+    else { // If they exist
       bold = !!form.bold_switch;
       italic = !!form.italic_switch;
       underline = !!form.underline_switch;
       transparentHighlight = !!form.transparent_switch;
+      includeDelims = !!form.include_switch;
     }
-    includeDelims = !!form.include_switch;
     deleteDelims = !!form.delete_switch;
   }
 

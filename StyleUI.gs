@@ -65,6 +65,9 @@ function styleCard(styleName, styleData, showAdv) {
         underlineSwitchCard(styleData)
       )
       .addWidget(
+        includeSwitchCard(styleData)
+      )
+      .addWidget(
         viewMoreCard(styleName, styleData, showAdv)
       );
   }
@@ -79,9 +82,6 @@ function styleCard(styleName, styleData, showAdv) {
     )
     .addWidget(
       deleteSwitchCard(styleData)
-    )
-    .addWidget(
-      includeSwitchCard(styleData)
     )
     .addWidget(
       saveStyleButton()
