@@ -208,7 +208,7 @@ function endCharCard(styleData) {
 function deleteSwitchCard(styleData) {
   return (
     CardService.newDecoratedText()
-      .setText('Delete delimiter characters with run')
+      .setText('Delete delimiter char\'s after apply')
       .setSwitchControl(
         CardService.newSwitch()
           .setFieldName('delete_switch')       // form key
@@ -227,7 +227,7 @@ function deleteSwitchCard(styleData) {
 function includeSwitchCard(styleData) {
   return (
     CardService.newDecoratedText()
-      .setText('Include delimiter characters in style')
+      .setText('Include delimiter char\'s in style')
       .setSwitchControl(
         CardService.newSwitch()
           .setFieldName('include_switch')
